@@ -1,0 +1,3 @@
+Product{productName='coffe', price=2.0, productCategory='basic needs'}
+Product{productName='cellphone', price=34.56, productCategory='more basic needs'}
+Product{productName='Kugelschreiber', price=63.68, productCategory='schreisachen'}
