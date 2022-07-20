@@ -6,19 +6,38 @@ public class Uebung16 {
     public static void main(String[] args) {
         String text = "Hallo World";
         FileOutputStream fileOutputStream;
-        ObjectOutputStream objectOutputStream;
+        ObjectOutputStream objectOutputStream = null;
         FileInputStream fileInputStream;
         ObjectInputStream objectInputStream = null;
 
         try {
-            fileOutputStream = new FileOutputStream("object.dat");
+            fileOutputStream = new FileOutputStream("object2.dat");
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            fileInputStream = new FileInputStream(text);
 
+            fileInputStream = new FileInputStream("object2.dat");
+            objectInputStream = new ObjectInputStream(fileInputStream);
 
+            objectOutputStream.writeObject(text);
+            objectOutputStream.flush();
 
-        } catch (IOException e) {
+            String finalText = (String) objectInputStream.readObject();
+
+            System.out.println(finalText);
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (objectInputStream != null) {
+                    objectInputStream.close();
+                }
+                if (objectOutputStream != null) {
+                    objectOutputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
